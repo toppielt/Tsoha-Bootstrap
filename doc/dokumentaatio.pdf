@@ -6,13 +6,15 @@ Ammuntatietokanta
 Järjestelmän tarkoituksena on toimia yhdistyksen järjestämien ammuntatapahtumien sekä yhdistyksen jäsenien ampumaharjoittelun määrän seuranta.
 
     Tiivis kuvaus siitä mistä on kyse.
+Järjestelmään on mahdollista tallentaa erilaisia järjestettyjä harjoituksia, niiden tuloksia sekä yksittäiset jäsenet voivat itse kirjata omia harjoitteitaan. Lisäksi järjestelmään voidaan tallentaa tulevia harjoituksia. Tuloksista ja kirjauksista ylläpitäjä voi tehdä erilaisia yhteenvetoja: vuoden aikana ammutut laukauksen, ampujien määrä ("prosenttiammunta"), viikkoharjoitusten ranking-listaa, aktiivisin ampuja jne.
 
     Millaisen toiminnan tukemiseen järjestelmä on tarkoitettu.
 
     Mitkä ovat järjestelmän tavoitteet.
 
-    Nämä tiedot saa yleensä tehtäväkuvauksesta, kirjoita kuitenkin omin sanoin.
+Järjestelmän tavoitteena on luoda toimiva ympäristö yhdistyksen tapahtumien seurantaan ja hallinnointiin.
 
+    
     Toteutus-/toimintaympäristö
 
     Missä ympäristössä työ toteutetaan (yleensä laitoksen users-palvelimella Tomcat- tai Apache-palvelimen alla)

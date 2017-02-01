@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa omia tietojasi</h1>
+
+  <form>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Pelattu
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Nimi</label>
+      <input class="form-control" value="Alok nönnönnöö" type="text">
+    </div>
+    <div class="form-group">
+      <label>Jäsennumero</label>
+      <input class="form-control" value="666" type="text">
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input class="form-control" value="joo@eika.fi" type="text">
+    </div>
+   
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}

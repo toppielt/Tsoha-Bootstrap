@@ -1,56 +1,60 @@
 
 
 
-        {% extends "base.html" %}
-        {% block content %}
+{% extends "base.html" %}
+{% block content %}
 
-        <h1>Painikkeet</h1>
-        <button>Tavallinen painike</button>
-        <button class="btn btn-default">Bootstrap painike</button>
-        <button class="btn btn-primary">Bootstrap painike</button>
-        <button class="btn btn-success">Bootstrap painike</button>
-        <button class="btn btn-danger">Bootstrap painike</button>
+<h1>Painikkeet</h1>
 
-        <h1>Tekstikentät</h1>
-        <input placeholder="Tavallinen tekstikenttä" type="text">
-        <input class="form-control" placeholder="Bootstrap tekstikenttä" type="text">
+<button class="btn btn-default">Lisää oma harjoitus</button>
+<button class="btn btn-primary">Ampumapäiväkirja</button>
+<button class="btn btn-primary">Tulokset</button>
+<button class="btn btn-success">Lisää tuleva harjoitus</button>
+<button class="btn btn-success">Lisää harjoitusten tulos</button>
+<button class="btn btn-danger">Yhteenveto</button>
+<button class="btn btn-danger">Prosenttiammunta</button>
+<h1>Tekstikentät</h1>
+<input placeholder="Tavallinen tekstikenttä" type="text">
+<input class="form-control" placeholder="Bootstrap tekstikenttä" type="text">
 
-        <h1>Taulukot</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Tavallinen</th>
-                    <th>Taulukko</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Tekstiä</td>
-                    <td>Tekstiä</td>
-                </tr>
-                <tr>
-                    <td>Tekstiä</td>
-                    <td>Tekstiä</td>
-                </tr>
-            </tbody>
-        </table>
+<h1>Taulukot</h1>
+<table class="table table-bordered table-striped">
+    <thead>
+    <h2> Tulevat harjoitukset</h2>
+    <th>Paikka</th>
+    <th>PVM</th>
+    <th>Kello</th>
+    <th>Ilmoittaudu</th>
 
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Bootstrap</th>
-                    <th>Taulukko</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Tekstiä</td>
-                    <td>Tekstiä</td>
-                </tr>
-                <tr>
-                    <td>Tekstiä</td>
-                    <td>Tekstiä</td>
-                </tr>
-            </tbody>
-        </table>
-        {% endblock %}
+</thead>
+<tbody> 
+    <tr>
+        <td>Osuva</td>
+        <td>5.2.2017</td>
+        <td>18.00</td>
+        <td>TÄYNNÄ</td>
+</table>
+
+<table class="table table-bordered table-striped">
+    <thead>
+    <h2> Viimeisimmät harjoitukseni </h2>
+    <tr>
+        <th>Paikka</th>
+        <th>Aika</th>
+        <th>Kesto</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td>Hätilä</td>
+        <td>01.01.2017</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>Kovelo</td>
+        <td>05.01.2017</td>
+        <td>5</td>
+    </tr>
+</tbody>
+</table>
+{% endblock %}

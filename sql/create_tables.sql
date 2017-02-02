@@ -1,42 +1,42 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
 CREATE TABLE Kayttaja (
-jasennumero INTEGER(8) PRIMARY KEY , 
+jasennumero int, 
 nimi varchar(30) NOT NULL,
 email varchar(30) NOT NULL,
 salasana varchar(20) NOT NULL,
-status STRING(10) NOT NULL;
-   )
-
-CREATE TABLE Kayttajanharjoitus(
-harjoitus INTEGER References Harjoitus(harjoitusID),
-ampuja INTEGER References Kayttaja(jasennumero),
-)
+status varchar(10) NOT NULL,
+PRIMARY KEY (jasennumero)
+   );
+CREATE TABLE Ammunta (
+ammuntaID SERIAL PRIMARY KEY,
+asetyyppi varchar(18) NOT NULL,
+laukausmaara int NOT NULL
+);
 
 CREATE TABLE Harjoitus(
-harjoitusID SERIAL INTEGER(8) PRIMARY KEY,
-pvm DATE NOT NULL;
-paikka STRING(20) NOT NULL,
-maxOsallistujat INTEGER(2),
-omaHarjoitus BOOLEAN,
-)
+harjoitusID SERIAL PRIMARY KEY,
+pvm DATE NOT NULL,
+paikka varchar(20) NOT NULL,
+maxOsallistujat int ,
+omaHarjoitus BOOLEAN default TRUE
+);
 
-CREATE TABLE Rasti, (
-rastiID SERIAL INTEGER(10) PRIMARY KEY,
-ammunta INTEGER References Ammunta(ammuntaID) NOT NULL,
-ampuja INTEGER References Kayttaja(jasennumero) NOT NULL,
-harjoitus INTEGER References Harjoitus(harjoitusID) NOT NULL,
-rastikuvaus STRING(160),
-) 
-CREATE TABLE Ammunta, (
-ammuntaID SERIAL INTEGER(8) PRIMARY KEY,
-asetyyppi STRING(18) NOT NULL,
-laukausmaara INTEGER(4) NOT NULL,
-)
+CREATE TABLE Rasti (
+rastiID SERIAL PRIMARY KEY,
+ammunta int References Ammunta(ammuntaID) NOT NULL,
+harjoitus int References Harjoitus(harjoitusID) NOT NULL,
+rastikuvaus varchar(160)
+);
+
 
 CREATE TABLE Tulos (
-ampuja INTEGER References Kayttaja(jasennumero) NOT NULL,
-rasti INTEGER References Rasti(rastiID) NOT NULL,
-aika DECIMAL(6),
-pisteet INTEGER(4),
-)
+ampuja int References Kayttaja(jasennumero) NOT NULL,
+rasti int References Rasti(rastiID) NOT NULL,
+aika DECIMAL,
+pisteet int
+);
+CREATE TABLE Kayttajanharjoitus(
+harjoitus int References Harjoitus(harjoitusID) NOT NULL,
+ampuja int References Kayttaja(jasennumero) NOT NULL
+);
 

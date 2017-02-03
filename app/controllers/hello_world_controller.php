@@ -11,11 +11,18 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
+        $matti = Kayttaja::find(1);
+        $kayttajat = Kayttaja::all();
+        
         $ekaharjoitus = Harjoitus::find(1);
         $harjoitukset = Harjoitus::all();
         
+        
+        Kint::dump($kayttajat);
+        Kint::dump($matti);
+        
         Kint::dump($harjoitukset);
-        Kint::dump($harjoitukset);
+        Kint::dump($ekaharjoitus);
     }
 
     public static function edit_omat_tiedot() {

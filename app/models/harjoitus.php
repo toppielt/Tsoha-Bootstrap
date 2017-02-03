@@ -6,8 +6,8 @@ class Harjoitus extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        
-       // $ekaharjoitus = new Harjoitus(array('harjoitusid' => 1, 'pvm' => 01-01-2017, 'kello' => 18.00, 'paikka' => 'Kovelo', 'maxOsallistujat' => 12, 'kesto' => 1.5 ,'lisatiedot' => 'ei ole', 'omaharjoitu' => false ));
+
+        // $ekaharjoitus = new Harjoitus(array('harjoitusid' => 1, 'pvm' => 01-01-2017, 'kello' => 18.00, 'paikka' => 'Kovelo', 'maxOsallistujat' => 12, 'kesto' => 1.5 ,'lisatiedot' => 'ei ole', 'omaharjoitu' => false ));
     }
 
     public static function all() {
@@ -21,12 +21,12 @@ class Harjoitus extends BaseModel {
         $harjoitukset = array();
 
         foreach ($rows as $row) {
-            $harjoitukset[] = new harjoitus(array(
+            $harjoitukset[] = new Harjoitus(array(
                 'harjoitusid' => $row['harjoitusid'],
                 'pvm' => $row['pvm'],
                 'kello' => $row['kello'],
                 'paikka' => $row['paikka'],
-               'maxOsallistujat' => $row['maxOsallistujat'],
+                'maxOsallistujat' => $row['maxOsallistujat'],
                 'kesto' => $row['kesto'],
                 'lisatiedot' => $row['lisatiedot'],
                 'omaharjoitus' => $row['omaharjoitus']
@@ -42,17 +42,16 @@ class Harjoitus extends BaseModel {
 
         if ($row) {
             $harjoitus = new Harjoitus(array(
-            'harjoitusid' => $row['harjoitusid'],
-            'pvm' => $row['pvm'],
-            'kello' => $row['kello'],
-            'paikka' => $row['paikka'],
-            'maxOsallistujat' => $row['maxOsallistujat'],
-            'kesto' => $row['kesto'],
-            'lisatiedot' => $row['lisatiedot'],
-            'omaharjoitus' => $row['omaharjoitus']
+                'harjoitusid' => $row['harjoitusid'],
+                'pvm' => $row['pvm'],
+                'kello' => $row['kello'],
+                'paikka' => $row['paikka'],
+                'maxOsallistujat' => $row['maxOsallistujat'],
+                'kesto' => $row['kesto'],
+                'lisatiedot' => $row['lisatiedot'],
+                'omaharjoitus' => $row['omaharjoitus']
             ));
             return $harjoitus;
-            
         }
         return null;
     }

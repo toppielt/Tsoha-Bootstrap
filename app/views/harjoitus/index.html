@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Tulevat harjoitukset</h1>
+
+  <p>
+    <a href="{{base_path}}/harjoitus/uusi" class="btn btn-success">Lisää harjoitus</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>PVM</th>
+        <th>Klo</th>
+        <th>Paikka</th>
+        <th>Maksimi osallistujamäärä</th>
+        <th>Harjoituksen kesto</th>
+        <th>Lisätiedot</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for harjoitus in harjoitukset %}
+        <tr>
+          <td><a href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}">{{harjoitus.paikka}}</td>
+          <td>{{harjoitus.kello}}</td>
+          <td>{{harjoitus.paikka}}</td>
+          <td> {{harjoitus.maxosallistujat}}</td>
+          <td>{{harjoitus.kesto}}</td>
+          <td>{{harjoitus.lisatiedot}}</td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/kauttaja/{{harjoitus.harjoitusid}}/edit">Ilmoittaudu</a></td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/kauttaja/{{harjoitus.harjoitusid}}/edit">Muokkaa</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 class Harjoitus extends BaseModel {
 
-    public $harjoitusid, $pvm, $kello, $paikka, $maxOsallistujat, $kesto, $lisatiedot, $omaharjoitus;
+    public $harjoitusid, $pvm, $kello, $paikka, $maxosallistujat, $kesto, $lisatiedot, $omaharjoitus;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -26,7 +26,7 @@ class Harjoitus extends BaseModel {
                 'pvm' => $row['pvm'],
                 'kello' => $row['kello'],
                 'paikka' => $row['paikka'],
-                'maxOsallistujat' => $row['maxOsallistujat'],
+                'maxosallistujat' => $row['maxosallistujat'],
                 'kesto' => $row['kesto'],
                 'lisatiedot' => $row['lisatiedot'],
                 'omaharjoitus' => $row['omaharjoitus']
@@ -46,7 +46,7 @@ class Harjoitus extends BaseModel {
                 'pvm' => $row['pvm'],
                 'kello' => $row['kello'],
                 'paikka' => $row['paikka'],
-                'maxOsallistujat' => $row['maxOsallistujat'],
+                'maxosallistujat' => $row['maxosallistujat'],
                 'kesto' => $row['kesto'],
                 'lisatiedot' => $row['lisatiedot'],
                 'omaharjoitus' => $row['omaharjoitus']
@@ -56,11 +56,14 @@ class Harjoitus extends BaseModel {
         return null;
     }
 
+    public function uusi() {
+         $query = DB::connection()->prepare('INSERT INTO Harjoitus (pvm, kello, paikka, maxosallistujat, kesto, lisatiedot ) VALUES (:pvm; :kello, :paikka, :maxosallistujat, :kesto, :lisatiedot) RETURNING harjoitusID');
+         
+         $query->execute(array('pvm' => $this->pvm, 'kello' => $this->kello, 'paikka' => $this->paikka, 'maxosallistujat' => $this->maxosallistujat, 'kesto' => $this->kesto, 'lisatiedot' => $this->lisatiedot));
+         
+         $row = $query->fetch();
+         
+         $this->harjoitusid = $row['harjoitusid'];
+    }
 }
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 

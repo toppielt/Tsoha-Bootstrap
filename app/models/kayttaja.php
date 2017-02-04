@@ -7,7 +7,7 @@ class Kayttaja extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
         
-        //$matti = new Kayttaja(array('jasennumero' => 1234, 'name' => 'MAtti', 'email' => 'matti@meikalainen.com', 'salasana' => 'mopo', 'status' => "admin"));
+       
     }
     
     public static function all(){
@@ -48,5 +48,14 @@ class Kayttaja extends BaseModel {
             return $kayttaja;
         }
         return null;
+    }
+    
+    public function save(){
+        
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (jasennumero, nimi, email, salasana, status) VALUES (:jasennumero, :nimi, :email, :salasana, :status)');
+        
+        $query->execute(array('jasennumero' => $this->jasennumero, 'nimi' => $this->nimi, 'email' => $this->email, 'salasana' => $this->salasana, 'status' => $this->status));
+        
+        $row = $query->fetch();
     }
 }

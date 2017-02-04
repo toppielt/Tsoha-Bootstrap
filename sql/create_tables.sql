@@ -14,18 +14,18 @@ laukausmaara int NOT NULL
 );
 
 CREATE TABLE Harjoitus(
-harjoitusID SERIAL PRIMARY KEY,
+harjoitusid SERIAL PRIMARY KEY,
 pvm DATE NOT NULL,
 kello decimal,
 paikka varchar(20) NOT NULL,
-maxOsallistujat int,
+maxosallistujat int,
 kesto DECIMAL,
 lisatiedot varchar(160),
 omaHarjoitus BOOLEAN default TRUE
 );
 
 CREATE TABLE Rasti (
-rastiID SERIAL PRIMARY KEY,
+rastiid SERIAL PRIMARY KEY,
 ammunta int References Ammunta(ammuntaID) NOT NULL,
 harjoitus int References Harjoitus(harjoitusID) NOT NULL,
 rastikuvaus varchar(160)

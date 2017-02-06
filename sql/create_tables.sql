@@ -16,8 +16,11 @@ laukausmaara int NOT NULL
 CREATE TABLE Harjoitus(
 harjoitusID SERIAL PRIMARY KEY,
 pvm DATE NOT NULL,
+kello decimal,
 paikka varchar(20) NOT NULL,
-maxOsallistujat int ,
+maxOsallistujat int,
+kesto DECIMAL,
+lisatiedot varchar(160),
 omaHarjoitus BOOLEAN default TRUE
 );
 

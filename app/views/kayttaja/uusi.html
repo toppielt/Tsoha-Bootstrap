@@ -2,6 +2,10 @@
 {% block content %}
 <h1>Lisää uusi käyttäjä </h1>
 
+<div class="alert alert-success">
+  {{message}}
+</div>
+
 <form method="post" action="{{base_path}}/kayttaja">
     <div class="form-group">
         <label>Jäsennumero</label>

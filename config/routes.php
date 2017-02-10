@@ -20,7 +20,10 @@ $routes->get('/harjoitus/:harjoitusid', function($harjoitusid) {
     HarjoitusController::showHarjoitus($harjoitusid);
 });
 
-
+$routes->get('/kayttaja/:jasennumero/edit', function($jasennumero){
+    //Redirect::to('{{base_path}}');
+  KayttajaController::editKayttaja($jasennumero);
+});
 $routes->get('/kayttaja/', function() {
     KayttajaController::index();
 });
@@ -53,10 +56,7 @@ $routes->post('/login', function(){
   KayttajaController::handle_login();
 });
 
-$routes->get('kayttaja/:jasennumero/edit', function($jasennumero){
-  
-  KayttajaController::edit($jasennumero);
-});
+
 $routes->post('/kayttaja/:jasennumero/edit', function($jasennumero){
 
   KayttajaController::update($jasennumero);
@@ -66,3 +66,4 @@ $routes->post('/kayttaja/:jasennumero/destroy', function($jasennumero){
   // Pelin poisto
   KayttajaController::destroy($jasennumero);
 });
+

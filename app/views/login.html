@@ -1,22 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Kirjaudu sisään</h1>
+<h1>Kirjaudu sisään</h1>
+<div class="alert alert-success">
+    {{message}}
+</div>
 
-  <!-- Kaikki lomakkeen elementit form-tagin sisään -->
-  <form>
+{%if error %}
+<div class="alert alert-danger">
+    {{error}}
+</div>
+{% endif %}
+<!-- Kaikki lomakkeen elementit form-tagin sisään -->
+<form>
     <!-- Tekstikenttä käyttäjätunnukselle -->
-     <form method="post" action="{{base_path}}/login">
-    <div class="form-group">
-      <label>Jäsennumero</label>
-     <input type="text" class="form-control" name="jasennumero" value="{{jasennumero}}">
-    </div>
+    <form method="post" action={{base_path}}/login>
+        <div class="form-group">
+            <label>Jäsennumero</label>
+            <input type="text" class="form-control" name="jasennumero" value="{{jasennumero}}">
+        </div>
 
-    <!-- Salasanakenttä salasanalle -->
-    <div class="form-group">
-      <label>Salasana</label>
-      <input type= "password" class="form-control" name="salasana">
-    </div>
+        <!-- Salasanakenttä salasanalle -->
+        <div class="form-group">
+            <label>Salasana</label>
+            <input type= "password" class="form-control" name="salasana">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
 
-    <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>
-  </form>
-{% endblock %}
+        </div>
+
+    </form>
+    {% endblock %}

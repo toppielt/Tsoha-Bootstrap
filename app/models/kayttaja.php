@@ -59,12 +59,14 @@ class Kayttaja extends BaseModel {
 
     public function destroy($jasennumero) {
 
-        $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE kayttaja.jasennumero = $jasennumero');
+        $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE jasennumero = :jasennumero');
+
+        $query->execute(array('jasennumero' => $jasennumero));
     }
 
-    public function authenticate() {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi AND salasana = :salasana LIMIT 1');
-        $query->execute(array('nimi' => $nimi, 'salasana' => $salasana));
+    public function authenticate($jasennumero, $salasana) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE jasennumero = :jasennumero AND salasana = :salasana LIMIT 1');
+        $query->execute(array('jasennumero' => $jasennumero, 'salasana' => $salasana));
         $row = $query->fetch();
         if ($row) {
             $kayttaja = new Kayttaja(array(
@@ -75,9 +77,23 @@ class Kayttaja extends BaseModel {
                 'status' => $row['status']
             ));
             return $kayttaja;
-        } else {
-            return null;
-        }
+        } 
+        return null;
+    }
+
+    public function update() {
+
+        $query = DB::connection()->prepare('UPDATE Kayttaja SET (nimi, email, salasana, status) = ( :nimi, :email, :salasana, :status) WHERE jasennumero= :jasennumero');
+
+        $query->execute(array(
+            'jasennumero' => $this->jasennumero,
+            'nimi' => $this->nimi,
+            'email' => $this->email,
+            'salasana' => $this->salasana,
+            'status' => $this->status
+        ));
+
+        $row = $query->fetch();
     }
 
 }

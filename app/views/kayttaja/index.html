@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Kayttajat</h1>
+  <h1>Käyttajat</h1>
 
+  <div class="alert alert-success">
+  {{message}}
+</div>
+  
   <p>
     <a href="{{base_path}}/kayttaja/uusi" class="btn btn-success">Lisää käyttäjä</a>
   </p>
@@ -15,7 +19,7 @@
         <th>Salasana</th>
         <th>Status</th>
         <th></th>
-        <th></th>
+       
       </tr>
     </thead>
 
@@ -29,11 +33,12 @@
 
           <td>{{kayttaja.status}}</td>
           <td><a class="btn btn-default btn-sm" href="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}/edit">Muokkaa</a></td>
-          <td><form method="post" action="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}/destroy" style="display: inline-block;">
-                    <button type="submit" class="btn btn-danger">Poista</button>
-            </td>
+          
         </tr>
       {% endfor %}
     </tbody>
+    <div class="alert alert-success">
+  {{message}}
+</div>
   </table>
 {% endblock %}

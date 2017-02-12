@@ -10,8 +10,8 @@ class HarjoitusController extends BaseController{
     
     public static function showHarjoitus($harjoitusid) {
        
-        $harjoitusid = Harjoitus::find($harjoitusid);
-        View::make('harjoitus/harjoitus.html', array('harjoitus' =>$harjoitusid));
+        $harjoitus = Harjoitus::find($harjoitusid);
+        View::make('harjoitus/harjoitus.html', array('harjoitus' =>$harjoitus));
     }
   
 }

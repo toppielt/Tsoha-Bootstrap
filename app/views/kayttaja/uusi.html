@@ -5,29 +5,34 @@
 <form method="post" action="{{base_path}}/kayttaja">
     <div class="form-group">
         <label>Jäsennumero</label>
-        <input type="text" name="jasennumero" class="form-control">
+        <input type="number" name="jasennumero" required class="form-control">
     </div>
 
     <div class="form-group">
         <label>Nimi</label>
-        <input type="text" name="nimi" class="form-control">
+        <input type="text" name="nimi" required="" class="form-control">
     </div>
 
     <div class="form-group">
         <label>Email</label>
-        <input type="text" name="email" class="form-control">
+        <input type="email" name="email" required class="form-control">
     </div>
 
     <div class="form-group">
         <label>Salasana</label>
-         <input type="text" name="salasana" class="form-control">
+         <input type="password" name="salasana" class="form-control">
     </div>
 
 
 
     <div class="form-group">
         <label>Status</label>
-        <input type="text" name="status" class="form-control">
+        <input list="modes" name="status" required class="form-control">
+        <datalist id="modes">
+            <option value="jasen">
+            <option value="johtaja">
+            <option value="moderator">
+        </datalist>
     </div>
 
     <div class="form-group">

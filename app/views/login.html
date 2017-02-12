@@ -5,15 +5,16 @@
   <!-- Kaikki lomakkeen elementit form-tagin sisään -->
   <form>
     <!-- Tekstikenttä käyttäjätunnukselle -->
+     <form method="post" action="{{base_path}}/login">
     <div class="form-group">
-      <label>Käyttäjätunnus</label>
-      <input class="form-control" type="text">
+      <label>Jäsennumero</label>
+     <input type="text" class="form-control" name="jasennumero" value="{{jasennumero}}">
     </div>
 
     <!-- Salasanakenttä salasanalle -->
     <div class="form-group">
       <label>Salasana</label>
-      <input class="form-control" type="password">
+      <input type= "password" class="form-control" name="salasana">
     </div>
 
     <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>

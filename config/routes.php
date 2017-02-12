@@ -20,9 +20,7 @@ $routes->get('/harjoitus/:harjoitusid', function($harjoitusid) {
     HarjoitusController::showHarjoitus($harjoitusid);
 });
 
-//$routes->get('/edit_omat_tiedot', function() {
-//  HelloWorldController::edit_omat_tiedot();
-//});
+
 $routes->get('/kayttaja/', function() {
     KayttajaController::index();
 });
@@ -45,6 +43,26 @@ $routes->get('/kayttaja/:jasennumero', function($jasennumero) {
 
 
 
-$routes->get('/login', function() {
-    HelloWorldController::login();
+$routes->get('/login', function(){
+  // Kirjautumislomakkeen esittäminen
+  KayttajaController::login();
+});
+
+$routes->post('/login', function(){
+  // Kirjautumisen käsittely
+  KayttajaController::handle_login();
+});
+
+$routes->get('kayttaja/:jasennumero/edit', function($jasennumero){
+  
+  KayttajaController::edit($jasennumero);
+});
+$routes->post('/kayttaja/:jasennumero/edit', function($jasennumero){
+
+  KayttajaController::update($jasennumero);
+});
+
+$routes->post('/kayttaja/:jasennumero/destroy', function($jasennumero){
+  // Pelin poisto
+  KayttajaController::destroy($jasennumero);
 });

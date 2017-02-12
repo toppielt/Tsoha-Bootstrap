@@ -57,13 +57,13 @@ class Harjoitus extends BaseModel {
     }
 
     public function uusi() {
-         $query = DB::connection()->prepare('INSERT INTO Harjoitus (pvm, kello, paikka, maxosallistujat, kesto, lisatiedot ) VALUES (:pvm; :kello, :paikka, :maxosallistujat, :kesto, :lisatiedot) RETURNING harjoitusID');
-         
-         $query->execute(array('pvm' => $this->pvm, 'kello' => $this->kello, 'paikka' => $this->paikka, 'maxosallistujat' => $this->maxosallistujat, 'kesto' => $this->kesto, 'lisatiedot' => $this->lisatiedot));
-         
-         $row = $query->fetch();
-         
-         $this->harjoitusid = $row['harjoitusid'];
-    }
-}
+        $query = DB::connection()->prepare('INSERT INTO Harjoitus (pvm, kello, paikka, maxosallistujat, kesto, lisatiedot ) VALUES (:pvm; :kello, :paikka, :maxosallistujat, :kesto, :lisatiedot) RETURNING harjoitusID');
 
+        $query->execute(array('pvm' => $this->pvm, 'kello' => $this->kello, 'paikka' => $this->paikka, 'maxosallistujat' => $this->maxosallistujat, 'kesto' => $this->kesto, 'lisatiedot' => $this->lisatiedot));
+
+        $row = $query->fetch();
+
+        $this->harjoitusid = $row['harjoitusid'];
+    }
+
+}

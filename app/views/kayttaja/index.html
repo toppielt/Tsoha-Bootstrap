@@ -15,6 +15,7 @@
         <th>Salasana</th>
         <th>Status</th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
 
@@ -27,7 +28,10 @@
           <td>{{kayttaja.salasana}}</td>
 
           <td>{{kayttaja.status}}</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/kauttaja/{{kayttaja.jasennumero}}/edit">Muokkaa</a></td>
+          <td><a class="btn btn-default btn-sm" href="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}/edit">Muokkaa</a></td>
+          <td><form method="post" action="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}/destroy" style="display: inline-block;">
+                    <button type="submit" class="btn btn-danger">Poista</button>
+            </td>
         </tr>
       {% endfor %}
     </tbody>

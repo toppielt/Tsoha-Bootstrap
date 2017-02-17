@@ -1,11 +1,11 @@
-PERKELEEE!!!
+
 
 # Tietokantasovelluksen esittelysivu
 
 Yleisiä linkkejä:
 
-* [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://github.com/toppielt/Tsoha-Bootstrap/blob/36f44aa8b2e5dec73398629c6bd02bf7ee6783d9/doc/dokumentaatio.pdf)
+* [Linkki sovellukseeni] (http://topikota.users.cs.helsinki.fi/tsoha/)
+* [Linkki dokumentaatiooni](https://github.com/toppielt/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
 
 ## Työn aihe
 

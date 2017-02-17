@@ -3,12 +3,14 @@
 class KayttajaController extends BaseController {
 
     public static function index() {
+        self::check_logged_in();
         $kayttajat = Kayttaja::all();
 
         View::make('kayttaja/index.html', array("kayttajat" => $kayttajat));
     }
 
     public static function showKayttaja($jasennumero) {
+        self::check_logged_in();
 
         $kayttaja = Kayttaja::find($jasennumero);
 
@@ -16,6 +18,7 @@ class KayttajaController extends BaseController {
     }
 
     public static function store() {
+        self::check_logged_in();
         $params = $_POST;
 
 
@@ -67,15 +70,19 @@ class KayttajaController extends BaseController {
     }
 
     public static function create() {
+        self::check_logged_in();
         View::make('kayttaja/uusi.html');
     }
 
     public static function editKayttaja($jasennumero) {
+        self::check_logged_in();
         $kayttaja = Kayttaja::find($jasennumero);
         View::make('kayttaja/edit.html', array('kayttaja' => $kayttaja));
     }
 
     public static function update($jasennumero) {
+        self::check_logged_in();
+        
         $params = $_POST;
 
         $attributes = array(
@@ -125,6 +132,7 @@ class KayttajaController extends BaseController {
     }
 
     public static function destroy($jasennumero) {
+        self::check_logged_in();
 
         $kayttaja = new Kayttaja(array('jasennumero' => $jasennumero));
 
@@ -141,7 +149,7 @@ class KayttajaController extends BaseController {
         
         $params = $_POST;
 
-        $kayttaja = User::authenticate($params['jasennumero'], $params['salasana']);
+        $kayttaja = Kayttaja::authenticate($params['jasennumero'], $params['salasana']);
 
         if (!$kayttaja) {
             View::make('login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'jasennumero' => $params['jasennumero']));
@@ -180,6 +188,12 @@ class KayttajaController extends BaseController {
         $v->rule('lengthMax', 'salasana', 20);
 
         return $v->errors();
+    }
+    
+    public static function logout() {
+        $_SESSION['kayttaja'] = null;
+        
+        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
     }
 
 }

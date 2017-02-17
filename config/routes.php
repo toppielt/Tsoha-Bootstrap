@@ -13,7 +13,7 @@ $routes->get('/harjoitus', function() {
 });
 
 $routes->get('/harjoitus/uusi', function() {
-    HarjoitusController::uusi();
+    HarjoitusController::create();
 });
 
 $routes->get('/harjoitus/:harjoitusid', function($harjoitusid) {
@@ -67,3 +67,6 @@ $routes->post('/kayttaja/:jasennumero/destroy', function($jasennumero){
   KayttajaController::destroy($jasennumero);
 });
 
+$routes->post('/logout', function(){
+  UserController::logout();
+});

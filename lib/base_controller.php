@@ -7,7 +7,7 @@
     if(isset($_SESSION['kayttaja'])){
       $jasennumero = $_SESSION['kayttaja'];
       // Pyydetään User-mallilta käyttäjä session mukaisella id:llä
-      $kayttaja = User::find($jasennumero);
+      $kayttaja = Kayttaja::find($jasennumero);
 
       return $kayttaja;
     }
@@ -19,8 +19,9 @@
 }
 
     public static function check_logged_in(){
-      // Toteuta kirjautumisen tarkistus tähän.
-      // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
+   if(!isset($_SESSION['kayttaja'])) {
+      Redirect::to('/login', array('message' => 'Sinun täytyy kirjautua ensin!'));
     }
 
+  }
   }

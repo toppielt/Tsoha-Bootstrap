@@ -13,5 +13,10 @@ class HarjoitusController extends BaseController{
         $harjoitus = Harjoitus::find($harjoitusid);
         View::make('harjoitus/harjoitus.html', array('harjoitus' =>$harjoitus));
     }
+    
+    public static function create() {
+        self::check_logged_in();
+        View::make('harjoitus/uusi.html');
+    }
   
 }

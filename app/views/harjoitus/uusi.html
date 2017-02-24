@@ -10,7 +10,7 @@
 
     <div class="form-group">
         <label>Klo</label>
-        <input type="number" name="kello" class="form-control">
+        <input type="text" name="kello" class="form-control">
     </div>
 
     <div class="form-group">
@@ -20,21 +20,30 @@
 
     <div class="form-group">
         <label>Maksimi osallistujamäärä</label>
-       <input type="number" name="paikka" class="form-control">
+       <input type="number" name="maxosallistujat" class="form-control">
     </div>
 
     <div class="form-group">
         <label>Harjoituksen kesto</label>
-       <input type="number" name="paikka" class="form-control">
+       <input type="text" name="kesto" class="form-control">
     </div>
 
     <div class="form-group">
         <label>Lisätiedot</label>
         <textarea name="lisatiedot" class="form-control"></textarea>
     </div>
+    
+    <div class="action">
+        <label> Oma harjoitus? </label> <br>
+        <input type="radio" name="omaharjoitus" value="FALSE"> Ei<br>
+        <input type="radio" name="omaharjoitus" value="TRUE"> Kyllä <br>
+            
+    </div>
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
+    
+    
 </form>
 {% endblock %}

@@ -16,6 +16,18 @@ class KayttajaController extends BaseController {
 
         View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja));
     }
+    
+    public static function omatTiedot() {
+        self::check_logged_in();
+        
+        $jasennumero = $_SESSION['kayttaja'];
+        
+        $kayttaja = Kayttaja.find(jasennumero);
+        
+        View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja));
+        
+        
+    }
 
     public static function store() {
         self::check_logged_in();
@@ -195,5 +207,7 @@ class KayttajaController extends BaseController {
         
         Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
     }
+    
+    
 
 }

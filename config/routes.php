@@ -15,14 +15,18 @@ $routes->get('/harjoitus', function() {
 $routes->get('/harjoitus/uusi', function() {
     HarjoitusController::create();
 });
+$routes->post('/harjoitus/', function() {
+    HarjoitusController::store();
+});
+
 
 $routes->get('/harjoitus/:harjoitusid', function($harjoitusid) {
     HarjoitusController::showHarjoitus($harjoitusid);
 });
 
-$routes->get('/kayttaja/:jasennumero/edit', function($jasennumero){
+$routes->get('/kayttaja/:jasennumero/edit', function($jasennumero) {
     //Redirect::to('{{base_path}}');
-  KayttajaController::editKayttaja($jasennumero);
+    KayttajaController::editKayttaja($jasennumero);
 });
 $routes->get('/kayttaja/', function() {
     KayttajaController::index();
@@ -46,27 +50,46 @@ $routes->get('/kayttaja/:jasennumero', function($jasennumero) {
 
 
 
-$routes->get('/login', function(){
-  // Kirjautumislomakkeen esittäminen
-  KayttajaController::login();
+$routes->get('/login', function() {
+    // Kirjautumislomakkeen esittäminen
+    KayttajaController::login();
 });
 
-$routes->post('/login', function(){
-  // Kirjautumisen käsittely
-  KayttajaController::handle_login();
+$routes->post('/login', function() {
+    // Kirjautumisen käsittely
+    KayttajaController::handle_login();
 });
 
 
-$routes->post('/kayttaja/:jasennumero/edit', function($jasennumero){
+$routes->post('/kayttaja/:jasennumero/edit', function($jasennumero) {
 
-  KayttajaController::update($jasennumero);
+    KayttajaController::update($jasennumero);
 });
 
-$routes->post('/kayttaja/:jasennumero/destroy', function($jasennumero){
-  // Pelin poisto
-  KayttajaController::destroy($jasennumero);
+$routes->post('/kayttaja/:jasennumero/destroy', function($jasennumero) {
+
+    KayttajaController::destroy($jasennumero);
 });
 
-$routes->post('/logout', function(){
-  UserController::logout();
+$routes->post('/logout', function() {
+    KayttajaController::logout();
+});
+
+$routes->post('/harjoitus/:harjoitusid/ilmoittaudu', function() {
+    HarjoitusController::ilmoittaudu();
+});
+
+$routes->post('/harjoitus/:harjoitusid/destroy', function($harjoitusid) {
+
+    HarjoitusController::destroy($harjoitusid);
+});
+
+$routes->get('harjoitus/omatharjoitukset', function() {
+    HarjoitusController::omatharjoitukset();
+});
+
+$routes->get('kayttaja/omattiedot', function() {
+    
+    KayttajaController::omattiedot();
+    
 });

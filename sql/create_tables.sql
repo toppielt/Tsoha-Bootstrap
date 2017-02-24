@@ -8,7 +8,7 @@ status varchar(10) NOT NULL,
 PRIMARY KEY (jasennumero)
    );
 CREATE TABLE Ammunta (
-ammuntaID SERIAL PRIMARY KEY,
+ammuntaid SERIAL PRIMARY KEY,
 asetyyppi varchar(18) NOT NULL,
 laukausmaara int NOT NULL
 );
@@ -21,7 +21,7 @@ paikka varchar(20) NOT NULL,
 maxosallistujat int,
 kesto DECIMAL,
 lisatiedot varchar(160),
-omaHarjoitus BOOLEAN default TRUE
+omaharjoitus BOOLEAN default TRUE
 );
 
 CREATE TABLE Rasti (

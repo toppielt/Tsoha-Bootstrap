@@ -14,9 +14,10 @@ class RastiController extends BaseController {
         View::make('harjoitus/harjoitus.html', array('rasti' => $rasti));
     }
 
-    public static function create() {
+    public static function create($harjoitusid) {
         self::check_logged_in();
-        View::make('/rasti/uusi.html');
+        
+        View::make('/rasti/uusi.html', array('harjoitus' => $harjoitusid));
     }
 
     public static function store() {
@@ -142,29 +143,6 @@ class RastiController extends BaseController {
             print_r($v->errors());
             View::make('/harjoitus/edit.html', array('harjoitus' => $harjoitus, 'message' => 'pieleen meni'));
         }
-    }
-    public static function ilmoittaudu($harjoitusid) {
-         self::check_logged_in();
-         
-         $jasennumero = self::get_jasennumero();
-         
-                 $query = DB::connection()->prepare('INSERT INTO Kayttajanharjoitus (harjoitus, ampuja) VALUES (:harjoitusid, $jasennumero)');
-
-        $query->execute(array('harjoitus' => $this->harjoitus, 'ampuja' => $this->ampuja));
-
-        $row = $query->fetch();
-
-       
-         
-         
-    } 
-    
-    public static function omatharjoitukset() {
-        self::check_logged_in();
-        
-         $harjoitukset = Harjoitus::all();
-
-        View::make('harjoitus/omatharjoitukset.html', array('harjoitukset' => $harjoitukset));
     }
 
 }

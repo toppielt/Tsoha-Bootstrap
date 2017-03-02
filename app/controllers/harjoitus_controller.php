@@ -112,6 +112,7 @@ class HarjoitusController extends BaseController {
         $params = $_POST;
 
         $attributes = array(
+            'harjoitusid' => $harjoitusid,
             'pvm' => $params['pvm'],
             'paikka' => $params['paikka'],
             'kello' => $params['kello'],
@@ -144,7 +145,7 @@ class HarjoitusController extends BaseController {
 
         if ($v->validate()) {
             $harjoitus->update();
-            Redirect::to('/', $harjoitus->harjoitusid, array('message' => 'Tietojen muokkaus onnistui!', 'user_logged_in' => $user_logged_in));
+            Redirect::to('/harjoitus/' . $harjoitus->harjoitusid, array('message' => 'Tietojen muokkaus onnistui!', 'user_logged_in' => $user_logged_in));
         } else {
             print_r($v->errors());
             View::make('/harjoitus/edit.html', array('harjoitus' => $harjoitus, 'message' => 'pieleen meni', 'user_logged_in' => $user_logged_in));
@@ -172,7 +173,7 @@ class HarjoitusController extends BaseController {
 
         $row = $query->fetch();
 
-        Redirect::to('/harjoitus', array( 'message' => 'Ilmoittautuminen onnoistui!', 'user_logged_in' => $user_logged_in));
+        Redirect::to('/harjoitus', array('message' => 'Ilmoittautuminen onnoistui!', 'user_logged_in' => $user_logged_in));
     }
 
     public static function omatHarjoitukset() {
@@ -186,7 +187,5 @@ class HarjoitusController extends BaseController {
 
         View::make('/harjoitus/omatharjoitukset.html', array('harjoitukset' => $harjoitukset, 'user_logged_in' => $user_logged_in));
     }
-    
-    
 
 }

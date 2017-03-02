@@ -139,7 +139,7 @@ class KayttajaController extends BaseController {
 
         if ($v->validate()) {
               $kayttaja->update();
-            Redirect::to('/kayttaja/' . $kayttaja->jasennumero, array('message' => 'Tietojen muokkaus onnistui!'));
+            Redirect::to('/kayttaja/harjoitus.html' . $kayttaja->jasennumero, array('message' => 'Tietojen muokkaus onnistui!'));
             } else {
            print_r($v->errors());
             View::make('/kayttaja/edit.html', array('kayttaja' => $kayttaja, 'message' => 'pieleen meni'));

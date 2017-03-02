@@ -12,27 +12,27 @@
 
     <div class="form-group">
         <label>PVM</label>
-        <input type="date" name="pvm" class="form-control" value="{{harjoitus.pvm}}">
+        <input type="date" name="pvm" required class="form-control" value="{{harjoitus.pvm}}">
     </div>
 
     <div class="form-group">
         <label>Klo</label>
-        <input type="text" name="kello" class="form-control" value="{{harjoitus.kello}}">
+        <input type="text" name="kello" required class="form-control" value="{{harjoitus.kello}}">
     </div>
 
     <div class="form-group">
         <label>Paikka</label>
-        <input type="text" name="paikka" class="form-control" value="{{harjoitus.paikka}}">
+        <input type="text" name="paikka" required class="form-control" value="{{harjoitus.paikka}}">
     </div>
 
     <div class="form-group">
         <label>Maksimi osallistujamäärä</label>
-        <input type="number" name="maxosallistujat" class="form-control" value="{{harjoitus.maxosallistujat}}">
+        <input type="number" name="maxosallistujat" required class="form-control" value="{{harjoitus.maxosallistujat}}">
     </div>
 
     <div class="form-group">
         <label>Harjoituksen kesto</label>
-        <input type="text" name="kesto" class="form-control" value="{{harjoitus.kesto}}">
+        <input type="text" name="kesto" class="form-control" required value="{{harjoitus.kesto}}">
     </div>
 
     <div class="form-group">
@@ -42,7 +42,7 @@
 
     <div class="action">
         <label> Oma harjoitus? </label> <br>
-        <input type="radio" name="omaharjoitus" value="FALSE"> Ei<br>
+        <input type="radio" name="omaharjoitus" value="FALSE" checked> Ei<br>
         <input type="radio" name="omaharjoitus" value="TRUE"> Kyllä <br>
 
     </div>

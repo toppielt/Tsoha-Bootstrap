@@ -95,5 +95,25 @@ class Kayttaja extends BaseModel {
 
         $row = $query->fetch();
     }
+    
+     public static function osallistujat($harjoitusid) {
+
+        $query = DB::connection()->prepare('SELECT nimi from Kayttaja, Kayttajanharjoitus
+                 WHERE Kayttaja.jasennumero = Kayttajanharjoitus.ampuja
+                 AND Kayttajanharjoitus.harjoitus = :harjoitusid');
+
+        $query->execute(array('harjoitusid' => $harjoitusid));
+
+        $rows = $query->fetchAll();
+
+        $osallistujat = array();
+
+        foreach ($rows as $row) {
+            $osallistujat[] = new Harjoitus(array(
+                'nimi' => $row['nimi']
+            ));
+        }
+        return $osallistujat;
+    }
 
 }

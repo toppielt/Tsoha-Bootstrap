@@ -15,16 +15,16 @@
         <tr>
             <th>Jasennumero</th>
             <th>Nimi</th>
-            <th>Email</th>
-            <th>Salasana</th>
-            <th>Status</th>
+            <th>Aika</th>
+            <th>Pisteet</th>
+            <th>Osumakerroin</th>
             <th></th>
-
+ 
         </tr>
     </thead>
 
     <tbody>
-
+        {% for ampuja in ampujat %}
         <tr>
             <td><a href="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}">{{kayttaja.jasennumero}}</td>
             <td>{{kayttaja.nimi}}</td>
@@ -37,7 +37,7 @@
                     <button type="submit" class="btn btn-danger">Poista</button>
             </td>
         </tr>
-
+        {% endfor %}
     </tbody>
 
 </table>

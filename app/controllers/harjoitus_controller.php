@@ -182,19 +182,11 @@ class HarjoitusController extends BaseController {
 
         $jasennumero1 = $user_logged_in->jasennumero;
 
-        $jasennumero = Harjoitus::omat($jasennumero1);
+        $harjoitukset = Harjoitus::omat($jasennumero1);
 
-        View::make('/harjoitus/omatharjoitukset.html', array('jasennumero' => $jasennumero, 'user_logged_in' => $user_logged_in));
+        View::make('/harjoitus/omatharjoitukset.html', array('harjoitukset' => $harjoitukset, 'user_logged_in' => $user_logged_in));
     }
     
-    public static function osallistujat($harjoitusid) {
-        self::check_logged_in();
-        
-        $user_logged_in = self::get_user_logged_in();
-        
-        $osallistujat = Harjoitus::osallistujat($harjoitusid);
-        
-        View::make('/harjoitus/osallistujat.html', array('osallistujat' => $osallistujat, 'user_logged_in' => $user_logged_in));
-    }
+    
 
 }

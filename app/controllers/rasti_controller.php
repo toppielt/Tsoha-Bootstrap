@@ -16,7 +16,7 @@ class RastiController extends BaseController {
 
     public static function create() {
         self::check_logged_in();
-        View::make('rasti/uusi.html');
+        View::make('/rasti/uusi.html');
     }
 
     public static function store() {

@@ -215,6 +215,14 @@ class KayttajaController extends BaseController {
         Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
     }
     
-    
+    public static function osallistujat($harjoitusid) {
+        self::check_logged_in();
+        
+        $user_logged_in = self::get_user_logged_in();
+        
+        $kayttajat= Kayttaja::osallistujat($harjoitusid);
+        
+        View::make('/harjoitus/osallistujat.html', array('kayttajat' => $kayttajat, 'user_logged_in' => $user_logged_in));
+    }
 
 }

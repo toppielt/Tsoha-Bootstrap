@@ -56,11 +56,13 @@ class Harjoitus extends BaseModel {
         return null;
     }
 
-    public static function omat($jasennumero) { 
-        
-        $query = DB::connection()->prepare('SELECT * from Kayttajanharjoitus WHERE ampuja = :jasennumero'); 
+    public static function omat($jasennumero) {
 
-        $query->execute();
+        $query = DB::connection()->prepare('SELECT * from Harjoitus, Kayttajanharjoitus
+                  WHERE Harjoitus.harjoitusid = Kayttajanharjoitus.harjoitus
+                 AND Kayttajanharjoitus.ampuja = :jasennumero');
+
+        $query->execute(array('jasennumero' => $jasennumero));
 
         $rows = $query->fetchAll();
 
@@ -68,11 +70,17 @@ class Harjoitus extends BaseModel {
 
         foreach ($rows as $row) {
             $harjoitukset[] = new Harjoitus(array(
-                'harjoitusid' => $row['harjoitus']
+                'harjoitusid' => $row['harjoitusid'],
+                'pvm' => $row['pvm'],
+                'kello' => $row['kello'],
+                'paikka' => $row['paikka'],
+                'maxosallistujat' => $row['maxosallistujat'],
+                'kesto' => $row['kesto'],
+                'lisatiedot' => $row['lisatiedot'],
+                'omaharjoitus' => $row['omaharjoitus']
             ));
         }
         return $harjoitukset;
-       
     }
 
     public function save() {
@@ -92,28 +100,10 @@ class Harjoitus extends BaseModel {
 
         $query->execute(array('harjoitusid' => $harjoitusid));
     }
-    
-    public static function osallistujat($harjoitusid) {
-        
-         $query = DB::connection()->prepare('SELECT Kayttaja.nimi AS kayttaja, Harjoitus.harjoitusid AS harjoitus FROM Kayttaja, Kayttajanharjoitus, Harjoitus WHERE Kayttaja.jasennumero = Kayttajanharjoitus.kayttaja AND Kayttajanharjoitus.harjoitus = Harjoitus.harjoitusid AND Kayttajanharjoitus.harjoitus = :harjoitusid');
 
-        $query->execute();
+   
 
-        $rows = $query->fetchAll();
-
-        $osallistujat = array();
-
-        foreach ($rows as $row) {
-            $osallistujat[] = new Harjoitus(array(
-                'harjoitus' => $row['harjoitusid'],
-                'kayttaja' =>$row['jasennumero']
-            ));
-        }
-        return $osallistujat;
-        
-    }
-    
-     public function update() {
+    public function update() {
 
         $query = DB::connection()->prepare('UPDATE Harjoitus SET (pvm, paikka, kello, maxosallistujat, kesto, lisatiedot, omaharjoitus) = ( :pvm, :paikka, :kello, :maxosallistujat, :kesto, :lisatiedot, :omaharjoitus) WHERE harjoitusid= :harjoitusid');
 

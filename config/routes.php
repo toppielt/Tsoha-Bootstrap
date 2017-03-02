@@ -77,7 +77,7 @@ HarjoitusController::update($harjoitusid);
 });
 
 $routes->get('/harjoitus/:harjoitusid/osallistujat', function($harjoitusid) {
-HarjoitusController::osallistujat($harjoitusid);
+KayttajaController::osallistujat($harjoitusid);
 });
 
 

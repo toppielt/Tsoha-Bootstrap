@@ -1,35 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Tulevat harjoitukseni</h1>
+<h1>Tulevat harjoitukseni</h1>
 
-  <div class="alert alert-success">
-  {{message}}
+<div class="alert alert-success">
+    {{message}}
 </div>
-  
 
-  
 
-  <table class="table table-striped table-bordered">
+
+
+<table class="table table-striped table-bordered">
     <thead>
-      <tr>
-        <th>PVM</th>
-        <th>Klo</th>
-        <th>Paikka</th>
-        <th>Harjoituksen kesto</th>
-        <th>Lisätiedot</th>
-        <th></th>
-      </tr>
+        <tr>
+            <th> </th>
+            <th>PVM</th>
+            <th>Klo</th>
+            <th>Paikka</th>
+            <th>Harjoituksen kesto</th>
+            <th>Lisätiedot</th>
+            <th></th>
+        </tr>
     </thead>
 
     <tbody>
-      {% for harjoitus in harjoitukset %}
+        {% for harjoitus in harjoitukset %}
         <tr>
-          <td>{{harjoitus.harjoitusid}}</td>
+            <td>{{harjoitus.harjoitusid}}</td>
+            <td>{{harjoitus.pvm}}</td>
+            <td> {{harjoitus.kello}}</td>
+            <td>{{harjoitus.paikka}} </td>
+            <td> {{harjoitus.kesto}} </td>
+            <td> {{harjoitus.lisatiedot}} </td>
 
-          <td> Peru ilmoittautuminen</>
-     
+            <td> Peru ilmoittautuminen</>
+
         </tr>
-      {% endfor %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 {% endblock %}

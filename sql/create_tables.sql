@@ -7,11 +7,6 @@ salasana varchar(20) NOT NULL,
 status varchar(10) NOT NULL,
 PRIMARY KEY (jasennumero)
    );
-CREATE TABLE Ammunta (
-ammuntaid SERIAL PRIMARY KEY,
-asetyyppi varchar(18) NOT NULL,
-laukausmaara int NOT NULL
-);
 
 CREATE TABLE Harjoitus(
 harjoitusid SERIAL PRIMARY KEY,
@@ -26,20 +21,27 @@ omaharjoitus BOOLEAN default TRUE
 
 CREATE TABLE Rasti (
 rastiid SERIAL PRIMARY KEY,
-ammunta int References Ammunta(ammuntaID) NOT NULL,
-harjoitus int References Harjoitus(harjoitusID) NOT NULL,
+harjoitus int REFERENCES Harjoitus(harjoitusid) ON DELETE CASCADE NOT NULL,
 rastikuvaus varchar(160)
+
 );
 
+CREATE TABLE Ammunta (
+ammuntaid SERIAL PRIMARY KEY,
+asetyyppi varchar(18) NOT NULL,
+laukausmaara int NOT NULL,
+rasti int REFERENCES Rasti(rastiid) ON DELETE CASCADE NOT NULL
+);
 
 CREATE TABLE Tulos (
-ampuja int References Kayttaja(jasennumero) NOT NULL,
-rasti int References Rasti(rastiID) NOT NULL,
+ampuja int REFERENCES Kayttaja(jasennumero) ON DELETE CASCADE NOT NULL,
+rasti int REFERENCES Rasti(rastiid) ON DELETE CASCADE NOT NULL,
 aika DECIMAL,
 pisteet int
 );
-CREATE TABLE Kayttajanharjoitus(
-harjoitus int References Harjoitus(harjoitusID) NOT NULL,
-ampuja int References Kayttaja(jasennumero) NOT NULL
-);
 
+CREATE TABLE Kayttajanharjoitus(
+harjoitus int REFERENCES Harjoitus(harjoitusid) ON DELETE CASCADE NOT NULL,
+ampuja int REFERENCES Kayttaja(jasennumero) ON DELETE CASCADE NOT NULL
+
+);

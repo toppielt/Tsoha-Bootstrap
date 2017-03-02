@@ -2,10 +2,17 @@
 {% block content %}
 <h1>Lisää tulos </h1>
 
+{% for osallistuja in osallistujat %}
+
 <form method="post" action="{{base_path}}/rasti">
     <div class="form-group">
-        <label>ampuja</label>
-        <input type="text" name="jasennumero" class="form-control">
+        <label>Ampuja</label>
+        <input type="text" name="nimi" class="form-control" value="{{kayttaja.nimi}}">
+    </div>
+
+    <div class="form-group">
+        <label>Jäsennumero</label>
+        <input type="text" name="jasennumero" class="form-control" value="{{kayttaja.jasennumero}}">
     </div>
 
     <div class="form-group">
@@ -18,14 +25,14 @@
         <input type="text" name="pisteet" class="form-control">
     </div>
 
-    
 
+    {%endfor%}
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
-    
-    
-    
-    
+
+
+
+
 </form>
 {% endblock %}

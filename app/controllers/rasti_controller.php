@@ -16,7 +16,7 @@ class RastiController extends BaseController {
 
     public static function create() {
         self::check_logged_in();
-        View::make('harjoitus/uusi.html');
+        View::make('rasti/uusi.html');
     }
 
     public static function store() {
@@ -24,9 +24,10 @@ class RastiController extends BaseController {
         $params = $_POST;
 
 
-
+        $ammunta = 
+        
         $harjoitus = new Harjoitus(array(
-            'pvm' => $params['pvm'],
+            '' => $params['pvm'],
             'paikka' => $params['paikka'],
             'kello' => $params['kello'],
             'maxosallistujat' => $params['maxosallistujat'],

@@ -10,6 +10,7 @@
     <a href="{{base_path}}/harjoitus/uusi" class="btn btn-success">Lisää harjoitus</a>
   </p>
   
+  {% if user_logged_in %}
 
   <table class="table table-striped table-bordered">
     <thead>
@@ -20,6 +21,7 @@
         <th>Maksimi osallistujamäärä</th>
         <th>Harjoituksen kesto</th>
         <th>Lisätiedot</th>
+        <th>Osallistujat</th>
       </tr>
     </thead>
 
@@ -32,12 +34,14 @@
           <td> {{harjoitus.maxosallistujat}}</td>
           <td>{{harjoitus.kesto}}</td>
           <td>{{harjoitus.lisatiedot}}</td>
-          <td> <form method="post" action={{base_path}}/harjoitus> 
-                  <input type="hidden" name ="harjoitus" value="{{harjoitus.harjoitusid}}"/>
-                  <input type="hidden" name="kayttaja" value="{{jasennumero}}"/>
-                          <a class="btn btn-default btn-sm" method="submit">Ilmoittaudu</a> </form></td>
+          <td> <a href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/osallistujat" class="btn btn-success">Osallistujat</a> </td>
+          <td> <form method="post" action="{{base_path}}/ilmoittaudu"> 
+                  <input type="hidden" name ="harjoitus" required class="form-control" value="{{harjoitus.harjoitusid}}">
+                          <button type="submit" class="btn btn-primary">Ilmoittaudu</button> </form></td>
         </tr>
       {% endfor %}
+      {% endif %}
     </tbody>
+    
   </table>
 {% endblock %}

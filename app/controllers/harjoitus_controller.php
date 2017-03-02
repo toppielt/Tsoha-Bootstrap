@@ -3,29 +3,39 @@
 class HarjoitusController extends BaseController {
 
     public static function index() {
-          self::check_logged_in();
+        self::check_logged_in();
+
+        $user_logged_in = self::get_user_logged_in();
+
         $harjoitukset = Harjoitus::all();
 
-        View::make('harjoitus/index.html', array('harjoitukset' => $harjoitukset));
+        View::make('harjoitus/index.html', array('harjoitukset' => $harjoitukset, 'user_logged_in' => $user_logged_in));
     }
 
     public static function showHarjoitus($harjoitusid) {
-          self::check_logged_in();
+        self::check_logged_in();
+
+        $user_logged_in = self::get_user_logged_in();
 
         $harjoitus = Harjoitus::find($harjoitusid);
-        View::make('harjoitus/harjoitus.html', array('harjoitus' => $harjoitus));
+        View::make('harjoitus/harjoitus.html', array('harjoitus' => $harjoitus, 'user_logged_in' => $user_logged_in));
     }
 
     public static function create() {
         self::check_logged_in();
-        View::make('harjoitus/uusi.html');
+
+        $user_logged_in = self::get_user_logged_in();
+
+        View::make('harjoitus/uusi.html', array('user_logged_in' => $user_logged_in));
     }
 
     public static function store() {
+
         self::check_logged_in();
+
+        $user_logged_in = self::get_user_logged_in();
+
         $params = $_POST;
-
-
 
         $harjoitus = new Harjoitus(array(
             'pvm' => $params['pvm'],
@@ -56,49 +66,52 @@ class HarjoitusController extends BaseController {
 
 
         $v->rule('date', 'pvm');
-        
+
         $v->rule('numeric', 'kesto');
-        
+
         $v->rule('numeric', 'kello');
-        
-        
-
-
-
-
 
         if ($v->validate()) {
             echo 'Hyvin meni';
         } else {
             print_r($v->errors());
-            View::make('harjoitus/uusi.html', array('message' => $v->errors()));
+            View::make('harjoitus/uusi.html', array('message' => $v->errors(), 'user_logged_in' => $user_logged_in));
         }
         $harjoitus->save();
 
-        Redirect::to('/kayttaja', array('message' => 'Harjoitus on tallennettu!'));
+        Redirect::to('/', array('message' => 'Harjoitus on tallennettu!', 'user_logged_in' => $user_logged_in));
     }
 
     public static function destroy($harjoitusid) {
         self::check_logged_in();
 
+        $user_logged_in = self::get_user_logged_in();
+
         $harjoitus = new Harjoitus(array('harjoitusid' => $harjoitusid));
 
         $harjoitus->destroy($harjoitusid);
 
-        Redirect::to('/harjoitus', array('message' => 'Harjoitus poistettu onnistuneesti!'));
+        Redirect::to('/harjoitus', array('message' => 'Harjoitus poistettu onnistuneesti!', 'user_logged_in' => $user_logged_in));
     }
 
     public static function editHarjoitus($harjoitusid) {
         self::check_logged_in();
+
+        $user_logged_in = self::get_user_logged_in();
+
         $harjoitus = Harjoitus::find($harjoitusid);
-        View::make('harjoitus/edit.html', array('harjoitus' => $harjoitus));
+
+        View::make('harjoitus/edit.html', array('harjoitus' => $harjoitus, 'user_logged_in' => $user_logged_in));
     }
 
     public static function update($harjoitusid) {
         self::check_logged_in();
 
-       
-        $harjoitus = new harjoitus(array(
+        $user_logged_in = self::get_user_logged_in();
+
+        $params = $_POST;
+
+        $attributes = array(
             'pvm' => $params['pvm'],
             'paikka' => $params['paikka'],
             'kello' => $params['kello'],
@@ -106,7 +119,7 @@ class HarjoitusController extends BaseController {
             'kesto' => $params['kesto'],
             'lisatiedot' => $params['lisatiedot'],
             'omaharjoitus' => $params['omaharjoitus']
-        ));
+        );
         // Luodaan validoija
         $v = new Valitron\Validator(array(
             'pvm' => $params['pvm'],
@@ -125,50 +138,63 @@ class HarjoitusController extends BaseController {
         $v->rule('required', 'maxosallistujat');
         $v->rule('required', 'kesto');
 
-
         $v->rule('date', 'pvm');
-
-
-
-
 
         $harjoitus = new Harjoitus($attributes);
 
-
-
         if ($v->validate()) {
             $harjoitus->update();
-            Redirect::to('/harjoitus/' . $harjoitus->harjoitusid, array('message' => 'Tietojen muokkaus onnistui!'));
+            Redirect::to('/', $harjoitus->harjoitusid, array('message' => 'Tietojen muokkaus onnistui!', 'user_logged_in' => $user_logged_in));
         } else {
             print_r($v->errors());
-            View::make('/harjoitus/edit.html', array('harjoitus' => $harjoitus, 'message' => 'pieleen meni'));
+            View::make('/harjoitus/edit.html', array('harjoitus' => $harjoitus, 'message' => 'pieleen meni', 'user_logged_in' => $user_logged_in));
         }
     }
-    public static function ilmoittaudu($harjoitusid) {
-         self::check_logged_in();
-         
 
-         
-         $jasennumero = self::get_jasennumero();
-         
-                 $query = DB::connection()->prepare('INSERT INTO Kayttajanharjoitus (harjoitus, ampuja) VALUES (:harjoitus, :jasennumero)');
+    public static function ilmoittaudu() {
+        self::check_logged_in();
 
-        $query->execute(array('harjoitus' => $this->harjoitus, 'ampuja' => $this->ampuja));
+        $user_logged_in = self::get_user_logged_in();
+
+        $ampuja = $user_logged_in->jasennumero;
+
+        $params = $_POST;
+
+        $harjoitus = $params['harjoitus'];
+
+
+
+
+
+        $query = DB::connection()->prepare('INSERT INTO Kayttajanharjoitus (harjoitus, ampuja) VALUES (:harjoitus, :ampuja)');
+
+        $query->execute(array('harjoitus' => $harjoitus, 'ampuja' => $ampuja));
 
         $row = $query->fetch();
-        
-        View::make('harjoitus/{{harjoitus/harjoitus.html', array ('harjoitus' => $harjoitus, 'message' => 'Ilmoittautuminen onnoistui!'));
-       
-         
-         
-    } 
-    
+
+        Redirect::to('/harjoitus', array( 'message' => 'Ilmoittautuminen onnoistui!', 'user_logged_in' => $user_logged_in));
+    }
+
     public static function omatHarjoitukset() {
         self::check_logged_in();
-        
-         $harjoitukset = Harjoitus::omat();
 
-        View::make('harjoitus/omatharjoitukset.html', array('harjoitukset' => $harjoitukset));
+        $user_logged_in = self::get_user_logged_in();
+
+        $jasennumero1 = $user_logged_in->jasennumero;
+
+        $jasennumero = Harjoitus::omat($jasennumero1);
+
+        View::make('/harjoitus/omatharjoitukset.html', array('jasennumero' => $jasennumero, 'user_logged_in' => $user_logged_in));
+    }
+    
+    public static function osallistujat($harjoitusid) {
+        self::check_logged_in();
+        
+        $user_logged_in = self::get_user_logged_in();
+        
+        $osallistujat = Harjoitus::osallistujat($harjoitusid);
+        
+        View::make('/harjoitus/osallistujat.html', array('osallistujat' => $osallistujat, 'user_logged_in' => $user_logged_in));
     }
 
 }

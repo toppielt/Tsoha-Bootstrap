@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>{{harjoitus.pvm}} {{harjoitus.paikka}}</h1>
+
+  <p>
+    <a href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/edit" class="btn btn-success">Muokkaa tietoja</a>
+  </p>
+  <form method="post" action="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/destroy" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa harjoituksen?">
+  <button type="submit" class="btn btn-danger">Poista</button>
+</form>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Nimi</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+     
+        <tr>
+          <td>{{harjoitus.pvm}}</td>
+          <td>{{harjoitus.kello}}</td>
+          <td>{{harjoitus.paikka}}</td>
+          <td>{{harjoitus.kesto}}</td>
+          <td>{{harjoitus.maxosallistujat}}</td>
+          <td>{{harjoitus.lisatiedot}}</td>
+          <td><td><a class="btn btn-default btn-sm" href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/rasti/lisaa">Lisää rastit</a></td>
+         
+        </tr>
+   
+    </tbody>
+  </table>
+{% endblock %}

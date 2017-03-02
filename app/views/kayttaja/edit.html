@@ -34,14 +34,16 @@ Muokkaa käyttäjää
 
 
 
-    <div class="form-group">
-        <label>Status</label>
-        <input list="modes" name="status" required class="form-control" value="{{kayttaja.status}}">
-        <datalist id="modes">
-            <option value="jasen">
-            <option value="johtaja">
-            <option value="moderator">
-        </datalist>
+   
+    <div class="action">
+        <label>Status</label> <br>
+      
+      
+        <input type="radio" name="status" value="jasen" checked> Jäsen <br>
+        <input type="radio" name="status" value="johtaja"> Ammunnan johtaja <br>
+        <input type="radio" name="status" value="moderator"> Moderator <br>
+            
+    
     </div>
 
     <div class="form-group">

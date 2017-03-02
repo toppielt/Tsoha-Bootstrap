@@ -15,7 +15,6 @@
         <th>PVM</th>
         <th>Klo</th>
         <th>Paikka</th>
-        <th>Osallistujamäärä</th>
         <th>Harjoituksen kesto</th>
         <th>Lisätiedot</th>
         <th></th>
@@ -25,12 +24,8 @@
     <tbody>
       {% for harjoitus in harjoitukset %}
         <tr>
-          <td><a href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}">{{harjoitus.pvm}}</td>
-          <td>{{harjoitus.kello}}</td>
-          <td>{{harjoitus.paikka}}</td>
-          <td>{{harjoitus.maxosallistujat}}</td>
-          <td>{{harjoitus.kesto}}</td>
-          <td>{{harjoitus.lisatiedot}}</td>
+          <td>{{harjoitus.harjoitusid}}</td>
+
           <td> Peru ilmoittautuminen</>
      
         </tr>

@@ -1,36 +1,33 @@
-<?php
+ <?php
 
 class KayttajaController extends BaseController {
 
     public static function index() {
         self::check_logged_in();
+         $user_logged_in = self::get_user_logged_in();
+        
         $kayttajat = Kayttaja::all();
 
-        View::make('kayttaja/index.html', array("kayttajat" => $kayttajat));
+        View::make('kayttaja/index.html', array('kayttajat' => $kayttajat, 'user_logged_in' => $user_logged_in ));
     }
 
     public static function showKayttaja($jasennumero) {
         self::check_logged_in();
-
+        
+         $user_logged_in = self::get_user_logged_in();
+        
         $kayttaja = Kayttaja::find($jasennumero);
 
         View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja));
     }
     
-    public static function omatTiedot() {
-        self::check_logged_in();
-        
-        $jasennumero = $_SESSION['kayttaja'];
-        
-        $kayttaja = Kayttaja.find(jasennumero);
-        
-        View::make('kayttaja/kayttaja.html', array('kayttaja' => $kayttaja));
-        
-        
-    }
+ 
 
     public static function store() {
         self::check_logged_in();
+        
+         $user_logged_in = self::get_user_logged_in();
+        
         $params = $_POST;
 
 
@@ -82,18 +79,26 @@ class KayttajaController extends BaseController {
     }
 
     public static function create() {
+        
         self::check_logged_in();
+        
+         $user_logged_in = self::get_user_logged_in();
+        
         View::make('kayttaja/uusi.html');
     }
 
     public static function editKayttaja($jasennumero) {
         self::check_logged_in();
+        
         $kayttaja = Kayttaja::find($jasennumero);
+        
         View::make('kayttaja/edit.html', array('kayttaja' => $kayttaja));
     }
 
     public static function update($jasennumero) {
         self::check_logged_in();
+        
+         $user_logged_in = self::get_user_logged_in();
         
         $params = $_POST;
 
@@ -146,6 +151,8 @@ class KayttajaController extends BaseController {
     public static function destroy($jasennumero) {
         self::check_logged_in();
 
+         $user_logged_in = self::get_user_logged_in();
+        
         $kayttaja = new Kayttaja(array('jasennumero' => $jasennumero));
 
         $kayttaja->destroy($jasennumero);

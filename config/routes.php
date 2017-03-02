@@ -8,21 +8,7 @@ $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });
 
-$routes->get('/harjoitus', function() {
-    HarjoitusController::index();
-});
-
-$routes->get('/harjoitus/uusi', function() {
-    HarjoitusController::create();
-});
-$routes->post('/harjoitus/', function() {
-    HarjoitusController::store();
-});
-
-
-$routes->get('/harjoitus/:harjoitusid', function($harjoitusid) {
-    HarjoitusController::showHarjoitus($harjoitusid);
-});
+// kayttajan reitit
 
 $routes->get('/kayttaja/:jasennumero/edit', function($jasennumero) {
     //Redirect::to('{{base_path}}');
@@ -41,31 +27,9 @@ $routes->get('/kayttaja/uusi', function() {
 });
 
 
-
-
-
 $routes->get('/kayttaja/:jasennumero', function($jasennumero) {
     KayttajaController::showKayttaja($jasennumero);
 });
-
-
-
-$routes->get('/login', function() {
-    // Kirjautumislomakkeen esittäminen
-    KayttajaController::login();
-});
-
-$routes->post('/login', function() {
-    // Kirjautumisen käsittely
-    KayttajaController::handle_login();
-});
-
-$routes->get('harjoitus/:harjoitusid/edit', function($harjoitusid) {
-HarjoitusController::editHarjoitus($harjoitusid);
-
-});
-
-
 
 $routes->post('/kayttaja/:jasennumero/edit', function($jasennumero) {
 
@@ -77,25 +41,77 @@ $routes->post('/kayttaja/:jasennumero/destroy', function($jasennumero) {
     KayttajaController::destroy($jasennumero);
 });
 
+$routes->get('/omatharjoitukset', function() {
+    HarjoitusController::omatHarjoitukset();
+});
+
+//harjoitus reitit
+$routes->post('/ilmoittaudu', function() {
+    
+    HarjoitusController::ilmoittaudu();
+});
+
+$routes->get('/harjoitus', function() {
+    HarjoitusController::index();
+});
+
+$routes->get('/harjoitus/uusi', function() {
+    HarjoitusController::create();
+});
+$routes->post('/harjoitus/', function() {
+    HarjoitusController::store();
+});
+
+
+$routes->get('/harjoitus/:harjoitusid', function($harjoitusid) {
+    HarjoitusController::showHarjoitus($harjoitusid);
+});
+
+$routes->get('/harjoitus/:harjoitusid/edit', function($harjoitusid) {
+HarjoitusController::editHarjoitus($harjoitusid);
+
+});
+
+$routes->post('/harjoitus/:harjoitusid/edit', function($harjoitusid) {
+HarjoitusController::update($harjoitusid);
+});
+
+$routes->get('/harjoitus/:harjoitusid/osallistujat', function($harjoitusid) {
+HarjoitusController::osallistujat($harjoitusid);
+});
+
+
+
 $routes->post('/logout', function() {
     KayttajaController::logout();
 });
 
-$routes->post('/harjoitus/', function($harjoitusid) {
-    HarjoitusController::ilmoittaudu($harjoitusid);
-});
+
 
 $routes->post('/harjoitus/:harjoitusid/destroy', function($harjoitusid) {
 
     HarjoitusController::destroy($harjoitusid);
 });
+    
 
-$routes->get('harjoitus/omatharjoitukset', function() {
-    HarjoitusController::omatHarjoitukset();
+
+$routes->get('/harjoitus/:harjoitusid/rasti/lisaa', function($harjoitusid) {
+RastiController::create($harjoitusid);
 });
 
-$routes->get('kayttaja/omattiedot', function() {
-    
-    KayttajaController::omattiedot();
-    
+// rastin reitit
+
+$routes->post('/harjoitus/:harjoitusid/rasti/lisaa', function() {
+RastiController::store();
+});
+
+
+$routes->get('/login', function() {
+    // Kirjautumislomakkeen esittäminen
+    KayttajaController::login();
+});
+
+$routes->post('/login', function() {
+    // Kirjautumisen käsittely
+    KayttajaController::handle_login();
 });

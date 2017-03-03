@@ -60,6 +60,12 @@ $routes->post('/login', function() {
     KayttajaController::handle_login();
 });
 
+$routes->get('harjoitus/:harjoitusid/edit', function($harjoitusid) {
+HarjoitusController::editHarjoitus($harjoitusid);
+
+});
+
+
 
 $routes->post('/kayttaja/:jasennumero/edit', function($jasennumero) {
 
@@ -75,8 +81,8 @@ $routes->post('/logout', function() {
     KayttajaController::logout();
 });
 
-$routes->post('/harjoitus/:harjoitusid/ilmoittaudu', function() {
-    HarjoitusController::ilmoittaudu();
+$routes->post('/harjoitus/', function($harjoitusid) {
+    HarjoitusController::ilmoittaudu($harjoitusid);
 });
 
 $routes->post('/harjoitus/:harjoitusid/destroy', function($harjoitusid) {
@@ -85,7 +91,7 @@ $routes->post('/harjoitus/:harjoitusid/destroy', function($harjoitusid) {
 });
 
 $routes->get('harjoitus/omatharjoitukset', function() {
-    HarjoitusController::omatharjoitukset();
+    HarjoitusController::omatHarjoitukset();
 });
 
 $routes->get('kayttaja/omattiedot', function() {

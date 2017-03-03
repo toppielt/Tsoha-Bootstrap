@@ -32,7 +32,10 @@
           <td> {{harjoitus.maxosallistujat}}</td>
           <td>{{harjoitus.kesto}}</td>
           <td>{{harjoitus.lisatiedot}}</td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/ilmoittaudu">Ilmoittaudu</a></td>
+          <td> <form method="post" action={{base_path}}/harjoitus> 
+                  <input type="hidden" name ="harjoitus" value="{{harjoitus.harjoitusid}}"/>
+                  <input type="hidden" name="kayttaja" value="{{jasennumero}}"/>
+                          <a class="btn btn-default btn-sm" method="submit">Ilmoittaudu</a> </form></td>
         </tr>
       {% endfor %}
     </tbody>

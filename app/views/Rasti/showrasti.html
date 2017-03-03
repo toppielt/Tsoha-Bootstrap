@@ -1,0 +1,46 @@
+
+{% extends "base.html" %}
+
+
+
+{% block content %}
+<h1>{{kayttaja.nimi}}</h1>
+<div class="alert alert-success">
+  {{message}}
+</div>
+
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Jasennumero</th>
+            <th>Nimi</th>
+            <th>Email</th>
+            <th>Salasana</th>
+            <th>Status</th>
+            <th></th>
+
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <tr>
+            <td><a href="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}">{{kayttaja.jasennumero}}</td>
+            <td>{{kayttaja.nimi}}</td>
+            <td>{{kayttaja.email}}</td>
+            <td>{{kayttaja.salasana}}</td>
+
+            <td>{{kayttaja.status}}</td>
+           
+            <td><form method="post" action="{{base_path}}/kayttaja/{{kayttaja.jasennumero}}/destroy" class="destroy-form" data-confirm="Oletko varma että haluat poistaa käyttäjän?" >
+                    <button type="submit" class="btn btn-danger">Poista</button>
+            </td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+
+{% endblock %}

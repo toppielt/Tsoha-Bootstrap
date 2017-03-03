@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Muokkaa harjoitusta {{harjoitus.pvm}} {{harjoitus.paikka}} </h1>
+
+<div class="alert alert-success">
+    {{message}}
+</div>
+
+
+<form method="post" action="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/edit">
+
+
+    <div class="form-group">
+        <label>PVM</label>
+        <input type="date" name="pvm" class="form-control" value="{{harjoitus.pvm}}">
+    </div>
+
+    <div class="form-group">
+        <label>Klo</label>
+        <input type="text" name="kello" class="form-control" value="{{harjoitus.klo}}">
+    </div>
+
+    <div class="form-group">
+        <label>Paikka</label>
+        <input type="text" name="paikka" class="form-control" value="{{harjoitus.paikka}}">
+    </div>
+
+    <div class="form-group">
+        <label>Maksimi osallistujamäärä</label>
+        <input type="number" name="maxosallistujat" class="form-control" value="{{harjoitus.maxosallistujat}}">
+    </div>
+
+    <div class="form-group">
+        <label>Harjoituksen kesto</label>
+        <input type="text" name="kesto" class="form-control" value="{{harjoitus.kesto}}">
+    </div>
+
+    <div class="form-group">
+        <label>Lisätiedot</label>
+        <textarea name="lisatiedot" class="form-control" value="{{harjoitus.lisatiedot}}"></textarea>
+    </div>
+
+    <div class="action">
+        <label> Oma harjoitus? </label> <br>
+        <input type="radio" name="omaharjoitus" value="FALSE"> Ei<br>
+        <input type="radio" name="omaharjoitus" value="TRUE"> Kyllä <br>
+
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+
+
+</form>
+{% endblock %}

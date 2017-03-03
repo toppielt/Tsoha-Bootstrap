@@ -3,7 +3,7 @@
   <h1>{{harjoitus.pvm}} {{harjoitus.paikka}}</h1>
 
   <p>
-    <a href="{{base_path}}/kayttaja/edit" class="btn btn-success">Muokkaa tietoja</a>
+    <a href="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/edit" class="btn btn-success">Muokkaa tietoja</a>
   </p>
   <form method="post" action="{{base_path}}/harjoitus/{{harjoitus.harjoitusid}}/destroy" class="destroy-form" data-confirm="Oletko varma, että haluat poistaa harjoituksen?">
   <button type="submit" class="btn btn-danger">Poista</button>

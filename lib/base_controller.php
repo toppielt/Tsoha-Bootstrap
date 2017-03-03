@@ -17,6 +17,15 @@ class BaseController {
 
         // ...
     }
+    
+    public static function get_jasennumero(){
+        if(isset($_SESSION['kayttaja'])) {
+            $jasennumero = $_SESSION['kayttaja'];
+            
+            return $jasennumero;
+        }
+        return null;
+    }
 
     public static function check_logged_in() {
         if (!isset($_SESSION['kayttaja'])) {

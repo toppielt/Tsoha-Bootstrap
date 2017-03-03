@@ -1,19 +1,17 @@
 <?php
 
-class HarjoitusController extends BaseController {
+class RastiController extends BaseController {
 
     public static function index() {
           self::check_logged_in();
-        $harjoitukset = Harjoitus::all();
-
-        View::make('harjoitus/index.html', array('harjoitukset' => $harjoitukset));
+       
     }
 
-    public static function showHarjoitus($harjoitusid) {
+    public static function showRasti($rastiid) {
           self::check_logged_in();
 
-        $harjoitus = Harjoitus::find($harjoitusid);
-        View::make('harjoitus/harjoitus.html', array('harjoitus' => $harjoitus));
+        $rasti = Rasti::find($rastiid);
+        View::make('harjoitus/harjoitus.html', array('rasti' => $rasti));
     }
 
     public static function create() {
@@ -147,26 +145,23 @@ class HarjoitusController extends BaseController {
     public static function ilmoittaudu($harjoitusid) {
          self::check_logged_in();
          
-
-         
          $jasennumero = self::get_jasennumero();
          
-                 $query = DB::connection()->prepare('INSERT INTO Kayttajanharjoitus (harjoitus, ampuja) VALUES (:harjoitus, :jasennumero)');
+                 $query = DB::connection()->prepare('INSERT INTO Kayttajanharjoitus (harjoitus, ampuja) VALUES (:harjoitusid, $jasennumero)');
 
         $query->execute(array('harjoitus' => $this->harjoitus, 'ampuja' => $this->ampuja));
 
         $row = $query->fetch();
-        
-        View::make('harjoitus/{{harjoitus/harjoitus.html', array ('harjoitus' => $harjoitus, 'message' => 'Ilmoittautuminen onnoistui!'));
+
        
          
          
     } 
     
-    public static function omatHarjoitukset() {
+    public static function omatharjoitukset() {
         self::check_logged_in();
         
-         $harjoitukset = Harjoitus::omat();
+         $harjoitukset = Harjoitus::all();
 
         View::make('harjoitus/omatharjoitukset.html', array('harjoitukset' => $harjoitukset));
     }

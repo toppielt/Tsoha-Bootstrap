@@ -2,7 +2,7 @@
 
 class Ammunta extends BaseModel {
 
-    public $ammuntaid, $asetyyppi, $laukausmaara;
+    public $ammuntaid, $rasti, $asetyyppi, $laukausmaara;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -50,11 +50,13 @@ class Ammunta extends BaseModel {
 
     public function save() {
 
-        $query = DB::connection()->prepare('INSERT INTO Kayttaja (jasennumero, nimi, email, salasana, status) VALUES (:jasennumero, :nimi, :email, :salasana, :status)');
+        $query = DB::connection()->prepare('INSERT INTO Ammunta (rasti, asetyyppi, laukausmaara) VALUES (:rasti, :asetyyppi, :laukausmaara) RETURNING ammuntaid');
 
-        $query->execute(array('jasennumero' => $this->jasennumero, 'nimi' => $this->nimi, 'email' => $this->email, 'salasana' => $this->salasana, 'status' => $this->status));
-
+        $query->execute(array('rasti' => $this->rasti, 'asetyyppi' => $this->asetyyppi, 'laukausmaara' => $this->laukausmaara));
+        
         $row = $query->fetch();
+        
+        $this->ammuntaid = $row['ammuntaid'];
     }
 
     public function destroy($jasennumero) {

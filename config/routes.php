@@ -105,6 +105,28 @@ $routes->post('/harjoitus/:harjoitusid/rasti/lisaa', function() {
 RastiController::store();
 });
 
+$routes->get('/harjoitus/:rastiid/ammunta', function($rastiid) {
+RastiController::lisaaAmmunta($rastiid);
+});
+
+$routes->get('/rasti/:rastiid/tulos', function($rastiid) {
+RastiController::tulos($rastiid);
+});
+
+$routes->post('/kayttaja/:harjoitusid/destroy', function($harjoitusid) {
+HarjoitusController::peru($harjoitusid);
+});
+
+$routes->post('/rasti/:rasti/tulos', function() {
+RastiController::storeTulos();
+});
+
+$routes->post('/rasti/:rasti/ammunta', function() {
+RastiController::storeAmmunta();
+});
+
+
+
 
 $routes->get('/login', function() {
     // Kirjautumislomakkeen esittäminen

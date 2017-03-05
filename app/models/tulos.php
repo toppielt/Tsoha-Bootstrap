@@ -31,7 +31,7 @@ class Tulos extends BaseModel {
     }
 
     public static function find($jasennumero) {
-        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE jasennumero = :jasennumero LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Tulos WHERE jasennumero = :jasennumero LIMIT 1');
         $query->execute(array('jasennumero' => $jasennumero));
         $row = $query->fetch();
 
@@ -50,9 +50,9 @@ class Tulos extends BaseModel {
 
     public function save() {
 
-        $query = DB::connection()->prepare('INSERT INTO Tulos (jasennumero, nimi, email, salasana, status) VALUES (:jasennumero, :nimi, :email, :salasana, :status)');
+        $query = DB::connection()->prepare('INSERT INTO Tulos (ampuja, rasti, aika, pisteet) VALUES (:ampuja, :rasti, :aika, :pisteet)');
 
-        $query->execute(array('jasennumero' => $this->jasennumero, 'nimi' => $this->nimi, 'email' => $this->email, 'salasana' => $this->salasana, 'status' => $this->status));
+        $query->execute(array('ampuja' => $this->ampuja, 'rasti' => $this->rasti, 'aika' => $this->aika, 'pisteet' => $this->pisteet));
 
         $row = $query->fetch();
     }
@@ -83,14 +83,13 @@ class Tulos extends BaseModel {
 
     public function update() {
 
-        $query = DB::connection()->prepare('UPDATE Kayttaja SET (nimi, email, salasana, status) = ( :nimi, :email, :salasana, :status) WHERE jasennumero= :jasennumero');
+        $query = DB::connection()->prepare('UPDATE Kayttaja SET (ampuja, rasti, aika, pisteet) = ( :ampuja, :rasti, :aika, :pisteet) WHERE jasennumero= :jasennumero');
 
         $query->execute(array(
-            'jasennumero' => $this->jasennumero,
-            'nimi' => $this->nimi,
-            'email' => $this->email,
-            'salasana' => $this->salasana,
-            'status' => $this->status
+            'ampuja' => $this->ampuja,
+            'rasti' => $this->rasti,
+            'aika' => $this->aika,
+            'pisteet' => $this->pisteet
         ));
 
         $row = $query->fetch();

@@ -2,13 +2,14 @@
 
 class Rasti extends BaseModel {
 
-    public $rastiid, $ammunta, $harjoitus, $rastikuvaus;
+    public $rastiid, $harjoitus, $rastikuvaus;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
 
         // $ekaharjoitus = new Harjoitus(array('harjoitusid' => 1, 'pvm' => 01-01-2017, 'kello' => 18.00, 'paikka' => 'Kovelo', 'maxOsallistujat' => 12, 'kesto' => 1.5 ,'lisatiedot' => 'ei ole', 'omaharjoitu' => false ));
     }
+    
 
     public static function harjoituksenRastit($harjoitusid) {
 
@@ -38,36 +39,32 @@ class Rasti extends BaseModel {
 
         if ($row) {
             $rasti = new Rasti(array(
-                'harjoitusid' => $row['harjoitusid'],
-                'pvm' => $row['pvm'],
-                'kello' => $row['kello'],
-                'paikka' => $row['paikka'],
-                'maxosallistujat' => $row['maxosallistujat'],
-                'kesto' => $row['kesto'],
-                'lisatiedot' => $row['lisatiedot'],
-                'omaharjoitus' => $row['omaharjoitus']
+                'rastiid' => $row['rastiid'],
+                'harjoitus' => $row['harjoitus'],
+                'rastikuvaus' => $row['rastikuvaus']
             ));
-            return $harjoitus;
+            return $rasti;
         }
         return null;
     }
 
     public function save() {
+       
         
-        $query = DB::connection()->prepare('INSERT INTO Harjoitus (pvm, kello, paikka, maxosallistujat, kesto, lisatiedot, omaharjoitus) VALUES (:pvm, :kello, :paikka, :maxosallistujat, :kesto, :lisatiedot, :omaharjoitus) RETURNING harjoitusid');
+        $query = DB::connection()->prepare('INSERT INTO Rasti (harjoitus, rastikuvaus) VALUES ( :harjoitus, :rastikuvaus) RETURNING rastiid');
 
-        $query->execute(array('pvm' => $this->pvm, 'kello' => $this->kello, 'paikka' => $this->paikka, 'maxosallistujat' => $this->maxosallistujat, 'kesto' => $this->kesto, 'lisatiedot' => $this->lisatiedot, 'omaharjoitus' => $this->omaharjoitus));
+        $query->execute(array('harjoitus' => $this->harjoitus, 'rastikuvaus' => $this-> rastikuvaus));
 
         $row = $query->fetch();
 
-        $this->harjoitusid = $row['harjoitusid'];
+        $this->rastiid = $row['rastiid'];
     }
     
-     public function destroy($harjoitusid) {
+     public function destroy($rastiid) {
 
-        $query = DB::connection()->prepare('DELETE FROM Harjoitus WHERE harjoitusid = :harjoitusid');
+        $query = DB::connection()->prepare('DELETE FROM Rasti WHERE rastiid = :rastiid');
 
-        $query->execute(array('harjoitusid' => $harjoitusid));
+        $query->execute(array('rastiid' => $rastiid));
     }
 
 }

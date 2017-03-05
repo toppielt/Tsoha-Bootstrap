@@ -1,34 +1,41 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Lisää tulos </h1>
+{% set i = 1 %}
+
+<h1>Lisää tulos {{rasti.rastikuvaus}} </h1>
+
+
 
 {% for osallistuja in osallistujat %}
 
-<form method="post" action="{{base_path}}/rasti">
+<form method="post" action="{{base_path}}/rasti/:rasti/tulos">
     <div class="form-group">
         <label>Ampuja</label>
-        <input type="text" name="nimi" class="form-control" value="{{kayttaja.nimi}}">
+        <input type="text" name="nimi{{i}}" class="form-control" value="{{osallistuja.nimi}}">
     </div>
+
+    <input type="hidden" name ="rasti" class="form-control" value="{{rasti.rastiid}}">
+
 
     <div class="form-group">
         <label>Jäsennumero</label>
-        <input type="text" name="jasennumero" class="form-control" value="{{kayttaja.jasennumero}}">
+        <input type="text" name="jasennumero{{i}}" class="form-control" value="{{osallistuja.jasennumero}}">
     </div>
-
     <div class="form-group">
         <label>Aika</label>
-        <input type="text" name="aika" class="form-control">
+        <input type="text" name="aika{{i}}" class="form-control">
     </div>
 
     <div class="form-group">
         <label>Pisteet</label>
-        <input type="text" name="pisteet" class="form-control">
+        <input type="text" name="pisteet{{i}}" class="form-control">
     </div>
 
-
+    {% set i = i +1 %}
     {% endfor %}    
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Lisää</button>
+        <button type="submit" class="btn btn-primary" name="lisaa" value="">Tallenna ja lisää uusi rasti</button>
+        <button type="submit" class="btn btn-primary" name="palaa" value="">Tallenna ja palaa harjoituksiin</button>
     </div>
 
 

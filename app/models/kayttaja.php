@@ -77,7 +77,7 @@ class Kayttaja extends BaseModel {
                 'status' => $row['status']
             ));
             return $kayttaja;
-        } 
+        }
         return null;
     }
 
@@ -95,10 +95,10 @@ class Kayttaja extends BaseModel {
 
         $row = $query->fetch();
     }
-    
-     public static function osallistujat($harjoitusid) {
 
-        $query = DB::connection()->prepare('SELECT nimi from Kayttaja, Kayttajanharjoitus
+    public static function osallistujat($harjoitusid) {
+
+        $query = DB::connection()->prepare('SELECT nimi, jasennumero, email from Kayttaja, Kayttajanharjoitus
                  WHERE Kayttaja.jasennumero = Kayttajanharjoitus.ampuja
                  AND Kayttajanharjoitus.harjoitus = :harjoitusid');
 
@@ -109,8 +109,10 @@ class Kayttaja extends BaseModel {
         $osallistujat = array();
 
         foreach ($rows as $row) {
-            $osallistujat[] = new Harjoitus(array(
-                'nimi' => $row['nimi']
+            $osallistujat[] = new Kayttaja(array(
+                'nimi' => $row['nimi'],
+                'jasennumero' => $row['jasennumero'],
+                 'email' => $row['email']   
             ));
         }
         return $osallistujat;

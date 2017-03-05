@@ -1,29 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>{{harjoitus.pvm}} {{harjoitus.paikka}}</h1>
+<h1>{{harjoitus.pvm}} {{harjoitus.paikka}} Rastikuvaus: {{rasti.rastikuvaus}}</h1>
 
- <form method="post" action="{{base_path}}/ammunta">
+<div class="alert alert-success">
+    {{message}}
+</div>
 
-     
-     <div class="action">
+<form method="post" action="{{base_path}}/rasti/{{rasti.rastiid}}/ammunta">
+
+
+    <div class="action">
         <label> Ase </label> <br>
         <input type="radio" name="asetyyppi" value="Pistooli"> Pistooli <br>
         <input type="radio" name="asetyyppi" value="Kivääri"> Kivääri <br>
         <input type="radio" name="asetyyppi" value="Haulikko"> Haulikko <br>
         <input type="radio" name="asetyyppi" value="Tarkkuuskivääri"> Tarkkuuskivääri <br>
-        
-            
+
+
     </div>
-     
-     <div class="form-group">
+
+    <div class="form-group">
         <label>Laukausmäärä </label>
-       <input type="number" name="laukasmaara" class="form-control">
+        <input type="number" name="laukausmaara" class="form-control">
     </div>
+    
+        <input type="hidden" name ="rasti" class="form-control" value="{{rasti.rastiid}}">
+
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
-    
-    
+
+
 </form>
 {% endblock %}

@@ -32,7 +32,9 @@
             <td> {{harjoitus.kesto}} </td>
             <td> {{harjoitus.lisatiedot}} </td>
 
-            <td> Peru ilmoittautuminen</>
+        <td><form method="post" action="{{base_path}}/kayttaja/{{harjoitus.harjoitusid}}/destroy" class="destroy-form" data-confirm="Oletko varma että haluat poistaa ilmoittautumisen?" >
+                    <button type="submit" class="btn btn-danger">Peru ilmoittautuminen</button>
+            </td>
 
         </tr>
         {% endfor %}

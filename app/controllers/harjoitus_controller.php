@@ -173,7 +173,7 @@ class HarjoitusController extends BaseController {
 
         $row = $query->fetch();
 
-        Redirect::to('/harjoitus', array('message' => 'Ilmoittautuminen onnoistui!', 'user_logged_in' => $user_logged_in));
+        Redirect::to('/harjoitus', array('message' => 'Ilmoittautuminen onnistui!', 'user_logged_in' => $user_logged_in));
     }
 
     public static function omatHarjoitukset() {
@@ -188,4 +188,19 @@ class HarjoitusController extends BaseController {
         View::make('/harjoitus/omatharjoitukset.html', array('harjoitukset' => $harjoitukset, 'user_logged_in' => $user_logged_in));
     }
 
+    public static function peru($harjoitus) {
+
+        self::check_logged_in();
+
+        $user_logged_in = self::get_user_logged_in();
+
+        $ampuja = $user_logged_in->jasennumero;
+
+        $query = DB::connection()->prepare('DELETE FROM Kayttajanharjoitus WHERE harjoitus = :harjoitus AND ampuja = :ampuja');
+
+        $query->execute(array('harjoitus' => $harjoitus, 'ampuja' => $ampuja));
+
+        $row = $query->fetch();
+    }
+     
 }

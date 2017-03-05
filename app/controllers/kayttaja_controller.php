@@ -71,7 +71,7 @@ class KayttajaController extends BaseController {
             echo 'Hyvin meni';
         } else {
             print_r($v->errors());
-            View::make('kayttaja/uusi.html', array('message' => $v->errors()));
+            View::make('kayttaja/uusi.html', array('message' => print_r($v->errors())));
         }
         $kayttaja->save();
 

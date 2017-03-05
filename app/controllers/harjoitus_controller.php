@@ -201,6 +201,14 @@ class HarjoitusController extends BaseController {
         $query->execute(array('harjoitus' => $harjoitus, 'ampuja' => $ampuja));
 
         $row = $query->fetch();
+        
+        
+        $jasennumero1 = $user_logged_in->jasennumero;
+
+        $harjoitukset = Harjoitus::omat($jasennumero1);
+
+        
+        View::make('/harjoitus/omatharjoitukset.html',  array('harjoitukset' => $harjoitukset, 'user_logged_in' => $user_logged_in));
     }
      
 }

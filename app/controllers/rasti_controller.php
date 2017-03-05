@@ -195,6 +195,8 @@ class RastiController extends BaseController {
                 'rasti' => $params['rasti'],
                 'aika' => $params['aika' . $i],
                 'pisteet' => $params['pisteet' . $i]
+                    
+                    
             ));
             // Luodaan validoija
           //  $v = new Valitron\Validator(array(
@@ -206,12 +208,12 @@ class RastiController extends BaseController {
             // Tietojen validointi
             //  $v->rule('required', 'harjoitusid');
 
-            if ($v->validate()) {
-                echo 'Hyvin meni';
-            } else {
-                print_r($v->errors());
-                View::make('/rasti/tulos.html', array('rasti' => $rasti, 'message' => $v->errors()));
-            }
+         //   if ($v->validate()) {
+           //     echo 'Hyvin meni';
+            //} else {
+              //  print_r($v->errors());
+                //View::make('/rasti/tulos.html', array('rasti' => $rasti, 'message' => $v->errors()));
+            //}
             
              $tulos->save();
         }

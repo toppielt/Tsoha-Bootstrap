@@ -113,7 +113,7 @@ $routes->get('/rasti/:rastiid/tulos', function($rastiid) {
 RastiController::tulos($rastiid);
 });
 
-$routes->post('/kayttaja/:harjoitusid/destroy', function($harjoitusid) {
+$routes->post('/kayttaja/destroy/:harjoitusid', function($harjoitusid) {
 HarjoitusController::peru($harjoitusid);
 });
 

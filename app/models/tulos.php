@@ -55,6 +55,7 @@ class Tulos extends BaseModel {
         $query->execute(array('ampuja' => $this->ampuja, 'rasti' => $this->rasti, 'aika' => $this->aika, 'pisteet' => $this->pisteet));
 
         $row = $query->fetch();
+        error_log($row);
     }
 
     public function destroy($jasennumero) {

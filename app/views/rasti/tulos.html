@@ -12,17 +12,17 @@
 
 <form method="post" action="{{base_path}}/rasti/:rasti/tulos">
     <div class="form-group">
-        <label>Ampuja</label>
-        <input type="text" name="nimi{{i}}" class="form-control" value="{{osallistuja.nimi}}">
+        <label>Ampuja: </label>
+        <label>{{osallistuja.nimi}} </label>
     </div>
 
     <input type="hidden" name ="rasti" class="form-control" value="{{rasti.rastiid}}">
 
 
-    <div class="form-group">
-        <label>Jäsennumero</label>
-        <input type="text" name="ampuja{{i}}" class="form-control" value="{{osallistuja.jasennumero}}">
-    </div>
+    
+        
+        <input type="hidden" name="ampuja{{i}}" class="form-control" value="{{osallistuja.jasennumero}}">
+   
     <div class="form-group">
         <label>Aika</label>
         <input type="text" name="aika{{i}}" class="form-control">

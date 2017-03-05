@@ -184,13 +184,18 @@ class RastiController extends BaseController {
         self::check_logged_in();
 
         $params = $_POST;
-
+        
         $rasti = $_POST['rasti'];
+        
+        $montako = $_POST['montako'];
+        
+                    
 
-
-        for ($i = 1; $params['ampuja[i]'] = null; $i++) {
-
+        
+        for ($i = 1; $i <= $montako; $i++) {
             $tulos = new Tulos(array(
+                
+                
                 'ampuja' => $params['ampuja' . $i],
                 'rasti' => $params['rasti'],
                 'aika' => $params['aika' . $i],
